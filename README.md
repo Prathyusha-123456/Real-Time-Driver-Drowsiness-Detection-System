@@ -2,13 +2,13 @@
 
 A real-time computer vision system that detects driver drowsiness and triggers an instant alert to prevent fatigue-related road accidents.
 
----
+
 
 ## About the Project
 
 Driver fatigue is responsible for over 20% of road accidents globally. This project presents an intelligent, non-intrusive real-time system that continuously monitors the driver's eye movements using a camera and machine learning — alerting them the moment drowsiness is detected.
 
----
+
 
 ## Features
 
@@ -20,7 +20,7 @@ Driver fatigue is responsible for over 20% of road accidents globally. This proj
 - Works under varied lighting conditions
 - Low latency, optimized for real-time performance
 
----
+
 
 ## Tech Stack
 
@@ -31,7 +31,7 @@ Driver fatigue is responsible for over 20% of road accidents globally. This proj
 - NumPy and SciPy
 - Pygame / Playsound
 
----
+
 
 ## How It Works
 
@@ -42,7 +42,7 @@ Driver fatigue is responsible for over 20% of road accidents globally. This proj
 5. CNN model classifies the driver as alert or drowsy
 6. Alarm is triggered if EAR drops below threshold for consecutive frames
 
----
+
 
 ## Getting Started
 
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 python drowsiness_detection.py
 ```
 
----
+
 
 ## Project Structure
 
@@ -89,7 +89,7 @@ driver-drowsiness-detection/
 └── README.md
 ```
 
----
+
 
 ## Results
 
@@ -100,7 +100,7 @@ driver-drowsiness-detection/
 | False Positive Rate | Low |
 | Lighting Conditions | Normal and low light |
 
----
+
 
 ## Limitations
 
@@ -109,7 +109,7 @@ driver-drowsiness-detection/
 - Does not detect drowsiness for drivers wearing sunglasses
 - Designed for single driver monitoring only
 
----
+
 
 ## Future Scope
 
@@ -119,7 +119,7 @@ driver-drowsiness-detection/
 - Edge deployment on Raspberry Pi or Jetson Nano
 - Integration with vehicle systems for automatic speed reduction
 
----
+
 
 ## Acknowledgements
 
