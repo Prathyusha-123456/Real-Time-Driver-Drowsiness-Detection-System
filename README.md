@@ -1,139 +1,180 @@
-Real-Time Driver Drowsiness Detection System
-Overview
+# Real-Time Driver Drowsiness Detection System using Vision Transformer
 
-This project presents a Django-based web application designed to detect driver drowsiness in real time using deep learning techniques. The system analyzes facial features through a webcam to identify signs of fatigue such as eye closure and yawning. Upon detecting drowsiness, it triggers an alert to help prevent potential accidents.
+A real-time driver drowsiness monitoring system using Vision Transformer (ViT) for accurate eye state analysis. The system achieves an accuracy of 98.8% in detecting driver drowsiness and triggers an instant alarm to prevent fatigue-related road accidents.
 
-The application integrates multiple deep learning models, including Convolutional Neural Networks (CNN), Vision Transformer (ViT), and a hybrid CNN-ViT model, to improve detection accuracy.
+---
 
-Features
-Separate authentication system for administrators and drivers
-Real-time webcam-based monitoring
-Eye state classification (open or closed)
-Yawn detection (yawn or no yawn)
-Audio alert system for drowsiness detection
-Detection history tracking for each driver
-Support for multiple deep learning models
-Web-based interface accessible through a browser
-System Architecture
+## About the Project
 
-The system operates through the following pipeline:
+Driver fatigue is responsible for over 1.3 million deaths in road accidents each year according to the World Health Organization. This project presents an intelligent, non-intrusive real-time system that continuously monitors the driver's eye state using a Vision Transformer (ViT) model — alerting them the moment drowsiness is detected.
 
-Capture video input from the driver's webcam
-Detect face using Haar Cascade or dlib
-Extract regions of interest such as eyes and mouth
-Perform classification using deep learning models
-Apply decision logic to determine drowsiness
-Trigger alert and log detection results
-Technology Stack
+The system was developed and presented at the 2024 International Conference on Intelligent Systems and Advanced Applications (ICISAA), Pune, India.
 
-Backend: Python, Django
-Deep Learning: TensorFlow, Keras
-Computer Vision: OpenCV, dlib
-Frontend: HTML, CSS, Bootstrap, jQuery
-Database: SQLite3
-Alert System: WAV audio playback
+---
 
-Project Structure
+## Features
 
-DriverDrowsiness/
-├── admins/
-├── users/
-│ ├── utility/
-│ └── dlibfatigue/
-├── assets/
-│ ├── static/
-│ └── templates/
-├── media/
-│ ├── models/
-│ ├── data/
-│ └── alarm.wav
-├── DriverDrowsiness/
-├── manage.py
-└── requirements.txt
+- Real-time video processing via webcam or dashboard camera
+- Face detection using Haar Cascade Classifier
+- Eye state classification using fine-tuned Vision Transformer (ViT) model
+- Detects open eye and closed eye states with high accuracy
+- Instant audio alarm triggered when drowsiness is detected
+- Works under varied lighting conditions including shady and dark environments
+- Trained on 84,900 images with 98.8% accuracy
 
-Models
+---
 
-The system uses the following trained models:
+## Tech Stack
 
-CNN: Baseline convolutional neural network
-Improved CNN: Deeper and regularized version
-Vision Transformer (ViT): Transformer-based image classification
-Hybrid CNN-ViT: Combined architecture for improved performance
-Best Model: Highest accuracy model selected after evaluation
-Dataset
+- Python
+- OpenCV
+- Vision Transformer (ViT) - google/vit-base-patch16-224-in21k
+- PyTorch
+- Haar Cascade Classifier
+- NumPy
 
-The dataset consists of four categories:
+---
 
-Open eyes
-Closed eyes
-Yawning
-No yawning
+## How It Works
 
-Data is organized into training and validation sets, with images extracted as regions of interest from facial features.
+1. Camera captures live video feed of the driver
+2. Haar Cascade Classifier detects the face in each frame
+3. Feature extraction is performed using the ViT model feature extractor
+4. Fine-tuned ViT model classifies the eye state as open or closed
+5. If closed eye probability exceeds threshold of 0.5, drowsiness is detected
+6. Alarm sound is triggered immediately to alert the driver
 
-Installation
-Prerequisites
-Python (version 3.7 to 3.11)
-pip
-Webcam
-Steps
-Clone the repository
-git clone https://github.com/your-username/driver-drowsiness-detection.git
-Navigate to the project directory
-cd driver-drowsiness-detection
-Create a virtual environment
-python -m venv venv
-Activate the environment
-On Windows: venv\Scripts\activate
-On Linux or macOS: source venv/bin/activate
-Install dependencies
+---
+
+## Model Details
+
+- Base Model: google/vit-base-patch16-224-in21k
+- Additional fully connected layers with 128, 256, and 384 hidden units
+- ReLU activation functions with dropout rate of 0.5
+- Dataset: 84,900 images of open and closed eyes
+- Data Split: 80% training, 10% validation, 10% testing
+- Training Images: 67,920
+- Epochs: 10
+- Learning Rate: 0.00001
+- Batch Size: 64 (training), 32 (validation and testing)
+
+---
+
+## Results
+
+| Metric | Value |
+|---|---|
+| Detection Accuracy | 98.8% |
+| Closed Eye Precision | 99.51% |
+| Closed Eye Recall | 98.97% |
+| Closed Eye F1-Score | 99.15% |
+| Open Eye Precision | 99.91% |
+| Open Eye Recall | 98.81% |
+| Open Eye F1-Score | 99.16% |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Webcam or USB camera
+- pip package manager
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/Prathyusha-123456/Driver-Drowsiness-Detection.git
+cd Driver-Drowsiness-Detection
+```
+
+2. Install dependencies
+
+```bash
 pip install -r requirements.txt
-Apply database migrations
-python manage.py migrate
-Create an administrator account
-python manage.py createsuperuser
-Run the development server
-python manage.py runserver
+```
 
-Access the application at http://127.0.0.1:8000
+3. Run the system
 
-Usage
-Administrator
-Log in through the admin portal
-Manage registered users
-View detection logs
-Driver
-Register and log in
-Start the detection module
-Allow webcam access
-Receive alerts when drowsiness is detected
-View personal detection history
-Documentation
+```bash
+python drowsiness_detection.py
+```
 
-Detailed project documentation is available in the DOCUMENTS directory, including:
+---
 
-Abstract
-Introduction
-Literature Survey
-System Analysis
-System Design
-Modules
-Test Cases
-Conclusion
+## Project Structure
 
-The base research paper related to the Vision Transformer model is included in the BASEPAPER directory.
+```
+Driver-Drowsiness-Detection/
+├── drowsiness_detection.py
+├── app.py
+├── model/
+│   └── drowsiness_model.h5
+├── requirements.txt
+├── ABSTRACT.docx
+├── INTRODUCTION.docx
+├── SYSTEM_ANALYSIS.docx
+├── INPUT_AND_OUTPUT_DESIGN.docx
+├── TEST_CASES.docx
+├── CONCLUSION.docx
+├── FUTURE_ENHANCEMENT.docx
+├── BIBLIOGRAPHY.docx
+└── README.md
+```
 
-Future Enhancements
-Mobile application integration
-Head pose estimation for distraction detection
-Multi-user session handling
-Notification system for alerts
-Deployment on embedded systems such as Raspberry Pi or Jetson
-Integration with vehicle systems for automated responses
-License
+---
 
-This project is intended for academic and research purposes. Proper citation is recommended if the work is extended or reused.
+## Limitations
 
-Acknowledgements
+- Requires a front-facing camera for accurate detection
+- Performance may reduce in complete darkness
+- Does not detect drowsiness for drivers wearing sunglasses
+- Designed for single driver monitoring only
+- Requires moderate computing resources for real-time processing
 
-This project utilizes tools and libraries such as OpenCV and dlib for computer vision and facial landmark detection.
+---
+
+## Future Enhancement
+
+- Integrating head pose estimation and yawning detection
+- Heart rate monitoring and steering behavior analysis
+- Infrared or thermal imaging for nighttime driving
+- Edge deployment on Raspberry Pi or NVIDIA Jetson
+- Integration with Advanced Driver Assistance Systems (ADAS)
+- IoT platform integration for real-time alerts to emergency services
+- Online learning for personalized driver behavior adaptation
+
+---
+
+## Publication
+
+This project was presented at:
+
+2024 International Conference on Intelligent Systems and Advanced Applications (ICISAA), Pune, India, Oct 25-26, 2024.
+
+DOI: 10.1109/ICISAA62385.2024.10829106
+
+---
+
+## Acknowledgements
+
+- Vishwakarma Institute of Information Technology, Pune
+- OpenCV — Computer vision framework
+- Hugging Face — Vision Transformer model
+- IEEE ICISAA 2024 — Conference publication
+
+---
+
+## Project Files
+
+| File | Description |
+|---|---|
+| drowsiness_detection.py | Main detection script — runs the real-time drowsiness detection |
+| app.py | Web application script — launches the system interface |
+| model/drowsiness_model.h5 | Trained Vision Transformer model file |
+| requirements.txt | List of all Python packages required to run the project |
+| rainfall in india 1901-2015.csv | Dataset used for training and testing |
+| README.md | Project documentation and setup guide |
